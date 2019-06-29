@@ -32,7 +32,7 @@ def getCompLevel(mydb, conn, x):
       data1 = r1.read()
       datastore = json.loads(data1)
       for a in datastore["items"] :
-        result = str(a["ComLevel"])+"  "+str(a["ComSubLevel"])
+        result = str(a["ComLevel"])+"\t"+str(a["ComSubLevel"])
     return result
 
 
