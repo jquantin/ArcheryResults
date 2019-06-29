@@ -66,19 +66,19 @@ datastore = json.loads(data1)
 listComp = []
 with codecs.open(str(idAthlete)+".xls", 'w', encoding='utf8') as f:
   #f= open(str(idAthlete)+".xls","w+")
-  print("CompID\tCompName\tCompPlace\tCompCountry\tCompDtFrom\tCompDtTo\tPhaseName\tFinalRank\tQualRank\tScore1\tSP1\tScore2\tSP2")
-  f.write("CompID\tCompName\tCompPlace\tCompCountry\tCompDtFrom\tCompDtTo\tPhaseName\tFinalRank\tQualRank\tScore1\tSP1\tScore2\tSP2\n")
+  print("CompID\tCompName\tCompPlace\tCompCountry\tCompDtFrom\tCompDtTo\tPhaseName\tFinalRank\tQualRank\tScore1\tSP1\t\t\t\t\tQualRank2\tScore2\tSP2")
+  f.write("CompID\tCompName\tCompPlace\tCompCountry\tCompDtFrom\tCompDtTo\tPhaseName\tFinalRank\tQualRank\tScore1\tSP1\t\t\t\t\tQualRank2\tScore2\tSP2\n")
   for a in datastore["items"] :
       if not(listComp.__contains__(a["CompID"])) :
         listComp.append(a["CompID"])
       #print("comp1:"+a["Competitor1"]["Athlete"]["Id"])
       #print("comp2:"+a["Competitor2"]["Athlete"]["Id"])
       if (str(a["Competitor1"]["Athlete"]["Id"])==str(idAthlete)):
-        print(str(a["CompID"])+"\t"+a["CompName"]+"\t"+a["CompPlace"]+"\t"+a["CompCountry"]+"\t"+a["CompDtFrom"]+"\t"+a["CompDtTo"]+"\t"+str(a["PhaseName"])+"\t"+str(a["Competitor1"]["FinalRank"])+"\t"+str(a["Competitor1"]["QualRank"])+"\t"+str(a["Competitor1"]["Score"])+"\t"+getResults(a["Competitor1"]["SP"])+"\t"+str(a["Competitor2"]["Score"])+"\t"+getResults(a["Competitor2"]["SP"]))
-        f.write(str(a["CompID"])+"\t"+a["CompName"]+"\t"+a["CompPlace"]+"\t"+a["CompCountry"]+"\t"+a["CompDtFrom"]+"\t"+a["CompDtTo"]+"\t"+str(a["PhaseName"])+"\t"+str(a["Competitor1"]["FinalRank"])+"\t"+str(a["Competitor1"]["QualRank"])+"\t"+str(a["Competitor1"]["Score"])+"\t"+getResults(a["Competitor1"]["SP"])+"\t"+str(a["Competitor2"]["Score"])+"\t"+getResults(a["Competitor2"]["SP"])+"\n")
+        print(str(a["CompID"])+"\t"+a["CompName"]+"\t"+a["CompPlace"]+"\t"+a["CompCountry"]+"\t"+a["CompDtFrom"]+"\t"+a["CompDtTo"]+"\t"+str(a["PhaseName"])+"\t"+str(a["Competitor1"]["FinalRank"])+"\t"+str(a["Competitor1"]["QualRank"])+"\t"+str(a["Competitor1"]["Score"])+getResults(a["Competitor1"]["SP"])+"\t"+str(a["Competitor2"]["QualRank"])+"\t"+str(a["Competitor2"]["Score"])+getResults(a["Competitor2"]["SP"]))
+        f.write(str(a["CompID"])+"\t"+a["CompName"]+"\t"+a["CompPlace"]+"\t"+a["CompCountry"]+"\t"+a["CompDtFrom"]+"\t"+a["CompDtTo"]+"\t"+str(a["PhaseName"])+"\t"+str(a["Competitor1"]["FinalRank"])+"\t"+str(a["Competitor1"]["QualRank"])+"\t"+str(a["Competitor1"]["Score"])+getResults(a["Competitor1"]["SP"])+"\t"+str(a["Competitor2"]["QualRank"])+"\t"+str(a["Competitor2"]["Score"])+getResults(a["Competitor2"]["SP"])+"\n")
       else :
-        print(str(a["CompID"])+"\t"+a["CompName"]+"\t"+a["CompPlace"]+"\t"+a["CompCountry"]+"\t"+a["CompDtFrom"]+"\t"+a["CompDtTo"]+"\t"+str(a["PhaseName"])+"\t"+str(a["Competitor2"]["FinalRank"])+"\t"+str(a["Competitor2"]["QualRank"])+"\t"+str(a["Competitor2"]["Score"])+"\t"+getResults(a["Competitor2"]["SP"])+"\t"+str(a["Competitor1"]["Score"])+"\t"+getResults(a["Competitor1"]["SP"]))
-        f.write(str(a["CompID"])+"\t"+a["CompName"]+"\t"+a["CompPlace"]+"\t"+a["CompCountry"]+"\t"+a["CompDtFrom"]+"\t"+a["CompDtTo"]+"\t"+str(a["PhaseName"])+"\t"+str(a["Competitor2"]["FinalRank"])+"\t"+str(a["Competitor2"]["QualRank"])+"\t"+str(a["Competitor2"]["Score"])+"\t"+getResults(a["Competitor2"]["SP"])+"\t"+str(a["Competitor1"]["Score"])+"\t"+getResults(a["Competitor1"]["SP"])+"\n")
+        print(str(a["CompID"])+"\t"+a["CompName"]+"\t"+a["CompPlace"]+"\t"+a["CompCountry"]+"\t"+a["CompDtFrom"]+"\t"+a["CompDtTo"]+"\t"+str(a["PhaseName"])+"\t"+str(a["Competitor2"]["FinalRank"])+"\t"+str(a["Competitor2"]["QualRank"])+"\t"+str(a["Competitor2"]["Score"])+getResults(a["Competitor2"]["SP"])+str(a["Competitor1"]["QualRank"])+"\t"+str(a["Competitor1"]["Score"])+getResults(a["Competitor1"]["SP"]))
+        f.write(str(a["CompID"])+"\t"+a["CompName"]+"\t"+a["CompPlace"]+"\t"+a["CompCountry"]+"\t"+a["CompDtFrom"]+"\t"+a["CompDtTo"]+"\t"+str(a["PhaseName"])+"\t"+str(a["Competitor2"]["FinalRank"])+"\t"+str(a["Competitor2"]["QualRank"])+"\t"+str(a["Competitor2"]["Score"])+getResults(a["Competitor2"]["SP"])+str(a["Competitor1"]["QualRank"])+"\t"+str(a["Competitor1"]["Score"])+getResults(a["Competitor1"]["SP"])+"\n")
 
   f.close()
 
