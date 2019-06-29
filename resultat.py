@@ -13,6 +13,29 @@ def getResults(x):
     return result
 
 
+# petite fonction pour recup le lib des compet
+def getCompLevel(mydb, conn, x):
+    result = ""
+    '''
+    sql = "select comLevel, comSubLevel from competition where id="+str(x)
+    mycursor = mydb.cursor()
+    mycursor.execute(sql)
+    myresult = mycursor.fetchall()
+
+    for comp in myresult:
+      result = str(comp[0])+" "+str(comp[1])
+    '''
+    if result=="" :
+      #print("Recup du libelle pour comp "+str(x))
+      conn.request("GET", "/v3/COMPETITIONS/?CompId="+str(x)+"&RBP=1000")
+      r1 = conn.getresponse()
+      data1 = r1.read()
+      datastore = json.loads(data1)
+      for a in datastore["items"] :
+        result = str(a["ComLevel"])+"  "+str(a["ComSubLevel"])
+    return result
+
+
 athlete = input('Nom Athlete : ')
 print("Recup des resultats de "+athlete)
 
@@ -41,9 +64,6 @@ r1 = conn.getresponse()
 data1 = r1.read()
 datastore = json.loads(data1)
 listComp = []
-#print(data1)
-datastore = json.loads(data1)
-
 with codecs.open(str(idAthlete)+".xls", 'w', encoding='utf8') as f:
   #f= open(str(idAthlete)+".xls","w+")
   print("CompID\tCompName\tCompPlace\tCompCountry\tCompDtFrom\tCompDtTo\tPhaseName\tFinalRank\tQualRank\tScore1\tSP1\tScore2\tSP2")
@@ -71,8 +91,8 @@ with codecs.open(str(idAthlete)+"_score.xls", 'w', encoding='utf8') as f:
     datastore = json.loads(data1)
     for a in datastore["items"] :
       for b in a["Results"] :
-        print(str(x)+"\t"+str(b["Score"]))
-        f.write(str(x)+"\t"+str(b["Score"])+"\n")
+        print(str(x)+"\t"+getCompLevel(mydb, conn, x)+"\t"+str(b["Score"]))
+        f.write(str(x)+"\t"+getCompLevel(mydb, conn, x)+"\t"+str(b["Score"])+"\n")
 
   
   f.close()
